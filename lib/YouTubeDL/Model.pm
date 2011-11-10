@@ -83,15 +83,15 @@ sub search_youtube {
 my $lastfm;
 sub search_lastfm {
 	args my $self,
-		 my $artist => 'Str',
-		 my $page   => {isa => 'Int', default => 1},
-		 my $limit  => {isa => 'Int', default => 20};
-	
+	my $artist => 'Str',
+	my $page   => {isa => 'Int', default => 1},
+	my $limit  => {isa => 'Int', default => 20};
+
 	$lastfm //= Net::LastFM->new(
 		api_key    => config->{lastfm_api_key},
-    	api_secret => config->{lastfm_api_secret},
+		api_secret => config->{lastfm_api_secret},
 	);
-	
+
 	my $data;
 	eval {
 		$data = $lastfm->request_signed(
@@ -102,11 +102,10 @@ sub search_lastfm {
 			limit       => $limit,
 		);
 	};
-	
+
 	warn $@ and return [] if $@;
 	
 	require Coro::LWP;
-	#use Coro::LWP;
 	my @coros;
 	my @tracks;
    	for my $track (@{$data->{toptracks}->{track}}) {
