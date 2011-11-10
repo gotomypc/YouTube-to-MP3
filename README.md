@@ -9,6 +9,11 @@ Descriptin
 ----------
 Download and convert YouTube's video to MP3
 
+Requires
+--------
+
+ * ffmpeg
+
 How to Use
 ----------
 
@@ -18,7 +23,11 @@ How to Use
     cpanm Module::Install Module::Install::AuthorTests
     cpanm --installdeps .
 
-	# Edit ./config file
+	wget https://github.com/rg3/youtube-dl/raw/2011.10.19/youtube-dl
+	sudo mv youtube-dl /usr/bin/
+	sudo chmod +x /usr/bin/youtube-dl
+
+	# and edit ./config file
 
 	sqlite3 youtube_dl.db < db/dl_status.db
 	perl worker.pl
