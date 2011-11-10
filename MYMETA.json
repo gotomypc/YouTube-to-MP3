@@ -1,0 +1,60 @@
+{
+   "abstract" : "unknown",
+   "author" : [
+      "unknown"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112621",
+   "license" : [
+      "unknown"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "YouTubeDL",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "inc"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.62"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : 0
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Amon2::Lite" : 0,
+            "Amon2::Plugin::DBI" : 0,
+            "AnyEvent" : 0,
+            "AnyEvent::Handle" : 0,
+            "Class::Unload" : 0,
+            "Coro" : 0,
+            "DBI" : 0,
+            "File::Zglob" : 0,
+            "Furl" : 0,
+            "IPC::Cmd" : 0,
+            "Net::LastFM" : 0,
+            "Path::Class" : 0,
+            "Plack" : 0,
+            "Plack::Builder" : 0,
+            "SQL::Abstract" : 0,
+            "Smart::Args" : 0,
+            "Try::Tiny" : 0,
+            "XML::Atom" : 0,
+            "autodie" : 0,
+            "perl" : "5.010"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "version" : ""
+}

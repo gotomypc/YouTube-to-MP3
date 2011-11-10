@@ -1,0 +1,9 @@
+{
+	download_dir => "$ENV{HOME}/Music/mp3",
+	dns => 'dbi:SQLite:dbname=youtube_dl.db',
+	
+	# For using artist search, apply for an API account.
+	#   -> http://www.lastfm.jp/api/account
+    lastfm_api_key    => '',
+    lastfm_api_secret => '',
+}
