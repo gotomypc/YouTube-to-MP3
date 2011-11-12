@@ -53,11 +53,12 @@ sub model { $model_instance //= bless {}, __PACKAGE__ }
 #	http://code.google.com/intl/ja/apis/youtube/developers_guide_protocol.html#Searching_for_Videos
 my $furl;
 sub search_youtube {
-	args my $self,
-		 my $keyword  => 'Str',
-		 my $order_by => {isa => 'Str', default => 'relevance'},
-		 my $page     => {isa => 'Int', default => 1},
-		 my $limit    => {isa => 'Int', default => 20};
+	args
+		my $self,
+		my $keyword  => 'Str',
+		my $order_by => {isa => 'Str', default => 'relevance'},
+		my $page     => {isa => 'Int', default => 1},
+		my $limit    => {isa => 'Int', default => 20};
 			
 	my $uri = URI->new('http://gdata.youtube.com/feeds/api/videos');
 	$uri->query_form(
@@ -82,10 +83,11 @@ sub search_youtube {
 
 my $lastfm;
 sub search_lastfm {
-	args my $self,
-	my $artist => 'Str',
-	my $page   => {isa => 'Int', default => 1},
-	my $limit  => {isa => 'Int', default => 20};
+	args
+		my $self,
+		my $artist => 'Str',
+		my $page   => {isa => 'Int', default => 1},
+		my $limit  => {isa => 'Int', default => 20};
 
 	$lastfm //= Net::LastFM->new(
 		api_key    => config->{lastfm_api_key},

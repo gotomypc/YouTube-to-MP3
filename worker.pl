@@ -31,16 +31,16 @@ my $cv = AE::cv;
 my $handle; $handle = AnyEvent::Handle->new(fh => $fh);
 my $w; 
 my $read; $read = sub {
-    $handle->push_read(line => sub {
-        my ($handle, $line) = @_; 
-        $w = AE::timer(0, 0, $read);
+	$handle->push_read(line => sub {
+		my ($handle, $line) = @_; 
+		$w = AE::timer(0, 0, $read);
 
 		if (fork ~~ 0) {
 			chomp $line;
 			main($line);
 			exit 0;
 		}
-    }); 
+	}); 
 };
 $w = AE::timer(0, 0, $read);
 

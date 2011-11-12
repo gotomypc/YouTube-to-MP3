@@ -29,7 +29,7 @@ How to Use
 
 	# and edit ./config file
 
-	sqlite3 youtube_dl.db < db/dl_status.db
+	sqlite3 youtube_dl.db < db/dl_status.sql
 	perl worker.pl
 	
     plackup app.psgi
