@@ -32,7 +32,7 @@ sub err {
 	for (@_) {
 		next unless defined $_;
 		chomp $_;
-		print STDERR colored("$_ at $file line $line\n", 'red') for @_;
+		print STDERR encode_utf8(colored("$_ at $file line $line\n", 'red')) for @_;
 	}
 }
 

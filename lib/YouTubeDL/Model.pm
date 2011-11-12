@@ -10,9 +10,11 @@ use parent qw/Exporter/;
 use XML::Atom::Feed;
 use Smart::Args;
 use YouTubeDL::Config qw/config/;
+use YouTubeDL::Util qw/err/;
 use Class::Unload;
 use Furl;
 use Coro;
+use Sub::Retry qw/retry/;
 
 our @EXPORT_OK = qw/model/;
 
@@ -68,12 +70,18 @@ sub search_youtube {
 		'max-results' => $limit,
 	);
 
-	my $feed = XML::Atom::Feed->new(Stream => do {
-		$furl //= Furl->new();
-		my $res = $furl->get($uri->as_string);
-		return [] unless $res->is_success;
-		\$res->content;
-	});
+	$furl //= Furl->new();
+	my $res = retry 3, 1, sub {
+		$furl->get($uri->as_string);
+	}, sub {
+		! $res->is_success;
+	};
+	unless ($res->is_success) {
+		my ($status_line) = $res->status_line =~ /([\s\w]+):/;
+		err(($status_line || "Error"). ": keyword[$keyword]");
+		return [];
+	}
+	my $feed = XML::Atom::Feed->new(Stream => \$res->content);
 	
 	return [map {+{
 		title    => decode_utf8($_->title),

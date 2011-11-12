@@ -35,8 +35,10 @@ my $read; $read = sub {
 		my ($handle, $line) = @_; 
 		$w = AE::timer(0, 0, $read);
 
-		if (fork ~~ 0) {
+		my $pid = fork;
+		if ($pid ~~ 0) {
 			chomp $line;
+			dbg("(start download) video_id:$line pid: $pid");
 			main($line);
 			exit 0;
 		}
@@ -54,8 +56,6 @@ sub main {
 	my $video_url = "http://www.youtube.com/watch?v=$video_id";
 	
 	my $title  = get_title($video_url);
-	
-	dbg("start download: id[$video_id]");
 	
 	my $filename = download($video_url, {
 		on_progress => sub {
@@ -153,7 +153,9 @@ sub cleanup {
 
 sub get_title {
 	my ($video_url) = @_;
-	return decode_utf8(`youtube-dl --get-title '$video_url'`) . ".mp3";
+	my $title = decode_utf8(`youtube-dl --get-title '$video_url'`);
+	$title =~ s/^\s+|\s+$//g;
+	$title =~ s/\s%|\s%//g;
+	return "$title.mp3";
 }
-
 

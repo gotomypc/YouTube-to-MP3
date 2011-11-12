@@ -20,6 +20,7 @@ requires 'SQL::Abstract';
 requires 'Smart::Args';
 requires 'Try::Tiny';
 requires 'XML::Atom';
+requires 'Sub::Retry';
 requires 'autodie';
 
 tests 't/*.t';
