@@ -74,7 +74,7 @@ sub search_youtube {
 	my $res = retry 3, 1, sub {
 		$furl->get($uri->as_string);
 	}, sub {
-		! $res->is_success;
+		! shift->is_success;
 	};
 	unless ($res->is_success) {
 		my ($status_line) = $res->status_line =~ /([\s\w]+):/;
